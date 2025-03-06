@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct style_guideApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView(store:Store(initialState: OnboardingViewReducer.State(), reducer: {
+                OnboardingViewReducer()
+            }))
         }
     }
 }
