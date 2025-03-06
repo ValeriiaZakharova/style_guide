@@ -5,4 +5,9 @@
 //  Created by Valeriia Zakharova on 05.03.2025.
 //
 
-import Foundation
+import ComposableArchitecture
+
+@Reducer
+struct QuizFocusReducer {
+
+}
