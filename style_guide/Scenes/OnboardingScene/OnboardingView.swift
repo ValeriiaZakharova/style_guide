@@ -48,8 +48,7 @@ struct OnboardingView: View {
                     }
                     Spacer()
                     MainButtonView(
-                        title: "Take a Quiz",
-                        color: .black) {
+                        title: "Take a Quiz") {
                             viewStore.send(.redirectUser)
                         }
                         .padding(.bottom, 16)

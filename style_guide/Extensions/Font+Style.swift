@@ -20,6 +20,10 @@ extension Font {
         Font.custom("KaiseiTokumin-Medium", size: 20)
     }
 
+    static var kBolt26: Font {
+        Font.custom("KaiseiTokumin-Medium", size: 26)
+    }
+
     // Font weight 600
     static var pSemiBold16: Font {
         Font.custom("Poppins-SemiBold", size: 16)
