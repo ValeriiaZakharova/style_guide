@@ -11,14 +11,8 @@ import ComposableArchitecture
 @Reducer
 struct OnboardingViewReducer {
 
-    @Reducer(state: .equatable)
-    enum Destination {
-        case quizFocus(QuizFocusReducer)
-    }
-
-    @ObservableState
     struct State: Equatable {
-        var currentPage = 0
+        var currentPage: Int = 0
         var onboardingData = [
             OnboardingViewModel(
                 title: "Your Personal Stylist",
@@ -33,8 +27,8 @@ struct OnboardingViewReducer {
                 subtitle: "hand-picked by your stylist",
                 image: Image(.onboarding3))
         ]
-
-        @Presents var destination: Destination.State?
+        @PresentationState var quizFocus: QuizFocusReducer.State?
+        
     }
 
     enum Action: BindableAction {
@@ -43,21 +37,17 @@ struct OnboardingViewReducer {
         case terms
         case privacy
         case binding(BindingAction<State>)
-        case destination(PresentationAction<Destination.Action>)
+        case quizFocus(PresentationAction<QuizFocusReducer.Action>)
     }
 
-    @Dependency(\.dismiss)
-    private var dismiss
-
     var body: some Reducer<State, Action> {
-        BindingReducer()
         Reduce { state, action in
             switch action {
             case .pageChanged(let index):
                 state.currentPage = index
                 return .none
             case .redirectUser:
-                state.destination = .quizFocus(QuizFocusReducer.State())
+                state.quizFocus = QuizFocusReducer.State()
                 return .none
             case .terms:
                 // Action to open terms
@@ -67,10 +57,12 @@ struct OnboardingViewReducer {
                 return .none
             case .binding:
                 return .none
-            case .destination:
+            case .quizFocus:
                 return .none
             }
         }
-        .ifLet(\.$destination, action: \.destination)
+        .ifLet(\.$quizFocus, action: \.quizFocus) {
+            QuizFocusReducer()
+        }._printChanges()
     }
 }
