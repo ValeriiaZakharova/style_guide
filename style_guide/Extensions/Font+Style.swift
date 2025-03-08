@@ -61,3 +61,10 @@ extension Font {
     }
 }
 
+extension UIFont {
+
+    static var pRegular13: UIFont {
+        UIFont(name: "Poppins-Regular", size: 13)!
+    }
+
+}
