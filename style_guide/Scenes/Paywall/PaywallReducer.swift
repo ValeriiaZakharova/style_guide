@@ -18,6 +18,7 @@ struct PaywallReducer {
     enum Action: BindableAction {
         case fetchProducts
         case productsResponse(TaskResult<[Product]>)
+        // TODO: Add purchase actions
         case binding(BindingAction<State>)
     }
 
