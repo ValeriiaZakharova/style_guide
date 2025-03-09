@@ -48,8 +48,8 @@ struct QuizColorReducer {
                 return .none
             }
         }
-//        .ifLet(\.$quizColor, action: \.quizColor) {
-//            QuizColorReducer()
+//        .ifLet(\.$paywall, action: \.paywall) {
+//            PaywallReducer()
 //        }._printChanges()
     }
 }
