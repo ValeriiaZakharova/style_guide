@@ -46,10 +46,7 @@ struct QuizStyleItem: View {
             }
             .padding(10)
         }
-        .overlay(
-            Rectangle()
-                .stroke(isSelected ? .textPrimary : .strokeSecondary, lineWidth: 1)
-        )
+        .border(isSelected ? .textPrimary : .strokeSecondary)
     }
 }
 

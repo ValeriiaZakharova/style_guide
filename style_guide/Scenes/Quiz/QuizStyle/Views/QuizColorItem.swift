@@ -29,7 +29,7 @@ struct QuizColorItem: View {
                     isSelected.toggle()
                 }) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 4)
+                        Rectangle()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.black)
 

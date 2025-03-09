@@ -42,10 +42,7 @@ struct QuizFocusItem: View {
             }
         }
         .padding(20)
-        .overlay(
-            Rectangle()
-                .stroke(isSelected ? .textPrimary : .strokeSecondary, lineWidth: 1)
-        )
+        .border(isSelected ? .textPrimary : .strokeSecondary)
     }
 }
 
