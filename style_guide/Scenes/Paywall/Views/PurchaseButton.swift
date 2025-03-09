@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct PurchaseHotButton: View {
+struct PurchaseButton: View {
 
     let title: String
     let description: String
     let price: String
-    var isSelected: Bool
     let isTrial: Bool
-    let action: () -> Void
+    @Binding var isSelected: Bool
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            isSelected.toggle()
+        }) {
             VStack(spacing: .zero) {
                 if isTrial {
                     Text("HOT DEAL 🔥 ")
@@ -55,7 +56,5 @@ struct PurchaseHotButton: View {
 }
 
 #Preview {
-    PurchaseHotButton(title: "Quarterly", description: "billed quarterly", price: "$59.99", isSelected: true, isTrial: true) {
-        
-    }
+    PurchaseButton(title: "Quarterly", description: "billed quarterly", price: "$59.99", isTrial: true, isSelected: .constant(true))
 }

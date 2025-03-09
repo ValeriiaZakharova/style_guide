@@ -18,6 +18,8 @@ struct PaywallReducer {
     enum Action: BindableAction {
         case fetchProducts
         case productsResponse(TaskResult<[Product]>)
+        case toggleSelection(id: String)
+        case makePurchase(PaywallProductModel)
         // TODO: Add purchase actions
         case binding(BindingAction<State>)
     }
@@ -45,6 +47,16 @@ struct PaywallReducer {
                     let secondIndex = Constants.identifiers.firstIndex(of: second.id) ?? Constants.identifiers.count
                     return firstIndex < secondIndex
                 })
+                return .none
+            case .toggleSelection(let id):
+                state.products = state.products.map { product in
+                    var updatedProduct = product
+                    updatedProduct.isSelected = (product.id == id)
+                    return updatedProduct
+                }
+                return .none
+            case .makePurchase(let product):
+                
                 return .none
             case .binding:
                 return .none

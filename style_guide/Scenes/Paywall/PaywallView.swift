@@ -19,27 +19,32 @@ struct PaywallView: View {
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
-            VStack {
-                Text("Unlock Premium")
-                    .font(.largeTitle)
-                    .padding()
-                LazyVGrid(columns: columns, alignment: .center) {
-                    ForEach(viewStore.products) { product in
-                        PurchaseHotButton(
-                            title: product.title,
-                            description: product.description,
-                            price: product.price,
-                            isSelected: product.isSelected,
-                            isTrial: product.isTrial) {
-                                
-                            }
+            ScrollView {
+                VStack {
+                    Text("Unlock Premium")
+                        .font(.largeTitle)
+                        .padding()
+                    LazyVGrid(columns: columns, alignment: .center) {
+                        ForEach(viewStore.products) { product in
+                            PurchaseButton(
+                                title: product.title,
+                                description: product.description,
+                                price: product.price,
+                                isTrial: product.isTrial,
+                                isSelected: Binding(
+                                    get: { product.isSelected },
+                                    set: { _ in
+                                        viewStore.send(.toggleSelection(id: product.id))
+                                    }
+                                ))
+                        }
                     }
                 }
+                .onAppear {
+                    viewStore.send(.fetchProducts)
+                }
+                .padding()
             }
-            .onAppear {
-                viewStore.send(.fetchProducts)
-            }
-            .padding()
         }
     }
 }
