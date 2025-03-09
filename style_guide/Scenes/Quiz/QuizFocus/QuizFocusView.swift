@@ -15,16 +15,8 @@ struct QuizFocusView: View {
         NavigationStack {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 ScrollView(showsIndicators: false) {
-                    VStack(spacing: 8) {
-                        Text("What’d you like our stylists to focus on?")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.kBolt26)
-                            .foregroundStyle(.textPrimary)
-                        Text("We offer services via live-chat mode.")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.pLight13)
-                            .foregroundStyle(.textPrimary)
-                    }
+                    TopView(title: viewStore.title,
+                            subtitle: viewStore.subtitle)
                     ForEach(viewStore.quizFocusData) { model in
                         QuizFocusItem(
                             title: model.title,
@@ -41,13 +33,16 @@ struct QuizFocusView: View {
                         }
                     }
                 }
+                .safeAreaInset(edge: .bottom) {
+                    MainButtonView(title: "Continue".uppercased()) {
+                        viewStore.send(.redirect)
+                    }
+                    .padding(.bottom, 20)
+                }
             }
         }
-        .safeAreaInset(edge: .bottom) {
-            MainButtonView(title: "Continue".uppercased()) {
-                // Handle continue action
-            }
-            .padding(.bottom, 20)
+        .navigationDestination(store: store.scope(state: \.$quizStyle, action: \.quizStyle)) { store in
+            QuizStyleView(store: store)
         }
         .customToolbar(
             title: "Lifestyle & Interests".uppercased(),
