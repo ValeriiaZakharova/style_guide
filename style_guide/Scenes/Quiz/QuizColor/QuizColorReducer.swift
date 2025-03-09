@@ -13,7 +13,7 @@ struct QuizColorReducer {
 
     struct State: Equatable {
         var quizColorData: [QuizColorItemModel] = QuizColorItemModel.model
-        let title = "Which style best represents you?"
+        let title = "Choose favourite colors"
 //        @PresentationState var paywall: PaywallReducer.State?
     }
 
