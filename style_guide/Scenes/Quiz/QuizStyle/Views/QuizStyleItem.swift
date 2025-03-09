@@ -1,5 +1,5 @@
 //
-//  QuizFocusItem.swift
+//  QuizStyleItem.swift
 //  style_guide
 //
 //  Created by Valeriia Zakharova on 08.03.2025.
@@ -7,23 +7,27 @@
 
 import SwiftUI
 
-struct QuizFocusItem: View {
+struct QuizStyleItem: View {
 
     let title: String
-    let subtitle: String
+    let image: Image
     @Binding var isSelected: Bool
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title.uppercased())
-                    .font(.pMedium13)
-                    .foregroundColor(.textPrimary)
-                Text(subtitle)
-                    .font(.pLight14)
-                    .foregroundColor(.textPrimary)
+        ZStack(alignment: .topTrailing) {
+            HStack {
+                VStack(alignment: .center, spacing: 4) {
+                    image
+                        .resizable()
+                        .scaledToFit()
+
+                    Text(title.uppercased())
+                        .font(isSelected ? .pMedium13 : .pLight13)
+                        .foregroundColor(.textPrimary)
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(8)
             Button(action: {
                 isSelected.toggle()
             }) {
@@ -40,12 +44,12 @@ struct QuizFocusItem: View {
                     }
                 }
             }
+            .padding(10)
         }
-        .padding(20)
         .border(isSelected ? .textPrimary : .strokeSecondary)
     }
 }
 
 #Preview {
-    QuizFocusItem(title: "Title", subtitle: "Subtitle", isSelected: .constant(false))
+    QuizStyleItem(title: "Title", image: Image(.sporty), isSelected: .constant(false))
 }

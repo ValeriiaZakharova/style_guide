@@ -29,6 +29,10 @@ extension Font {
         Font.custom("Poppins-SemiBold", size: 16)
     }
 
+    static var pSemiBold10: Font {
+        Font.custom("Poppins-SemiBold", size: 10)
+    }
+
     // Font weight 500
     static var pMedium13: Font {
         Font.custom("Poppins-Medium", size: 13)

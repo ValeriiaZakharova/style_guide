@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AttributedTextView: UIViewRepresentable {
     private enum Constants {
-        static let terms = ""
-        static let privacy = ""
+        static let terms = "terms"
+        static let privacy = "privacy"
     }
 
     var fullText: String
