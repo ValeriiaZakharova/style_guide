@@ -52,6 +52,9 @@ struct QuizColorView: View {
             .customToolbar(title: "Style preferences".uppercased()) {
                 viewStore.send(.dismiss)
             }
+            .onAppear{
+                store.send(.getData)
+            }
         }
         .fullScreenCover(store: store.scope(state: \.$paywall, action: \.paywall)) { store in
             PaywallView(store: store)

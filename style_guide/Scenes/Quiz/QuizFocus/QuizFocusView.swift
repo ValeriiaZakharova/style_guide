@@ -39,6 +39,9 @@ struct QuizFocusView: View {
                     }
                     .padding(.bottom, 20)
                 }
+                .onAppear {
+                    store.send(.getData)
+                }
             }
         }
         .navigationDestination(store: store.scope(state: \.$quizStyle, action: \.quizStyle)) { store in
