@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct QuizStyleView: View {
-    
+
     let store: StoreOf<QuizStyleReducer>
     @Environment(\.dismiss) private var dismiss
 
@@ -52,12 +52,11 @@ struct QuizStyleView: View {
                 viewStore.send(.dismiss)
             }
         }
-        .navigationDestination(store: store.scope(state: \.$quizColor, action: \.quizColor)) { store in
-            QuizColorView(store: store)
-        }
+//        .navigationDestination(store: store.scope(state: \.$quizColor, action: \.quizColor)) { store in
+//            QuizColorView(store: store)
+//        }
         .padding(.horizontal, 20)
         .navigationBarBackButtonHidden(true)
-        
     }
 }
 
