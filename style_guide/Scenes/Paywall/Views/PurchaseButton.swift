@@ -33,14 +33,15 @@ struct PurchaseButton: View {
                         Text(title)
                             .font(.pMedium16)
                             .foregroundColor(.textPrimary)
+                            .lineLimit(2)
                         if !isTrial {
                             Text(price)
                                 .font(.pRegular16)
                                 .foregroundColor(.textPrimary)
                         }
                     }
-                    Spacer()
                     Text(description)
+                        .lineLimit(3)
                         .font(.pLight14)
                         .foregroundColor(.textPrimary)
                 }
@@ -48,6 +49,7 @@ struct PurchaseButton: View {
                 .padding(.vertical, 12)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
+            .frame(maxHeight: .infinity)
         }
         .border(isSelected ? .textPrimary : .strokeSecondary)
         .background(isSelected ? .greyBackground : .clear)
@@ -56,5 +58,5 @@ struct PurchaseButton: View {
 }
 
 #Preview {
-    PurchaseButton(title: "Quarterly", description: "billed quarterly", price: "$59.99", isTrial: true, isSelected: .constant(true))
+    PurchaseButton(title: "Quarterly Quarterly Quarterly Quarterly Quarterly Quarterly", description: "billed quarterly", price: "$59.99", isTrial: true, isSelected: .constant(true))
 }
