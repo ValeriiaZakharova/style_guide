@@ -13,26 +13,25 @@ struct QuizColorItem: View {
     @Binding var isSelected: Bool
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            VStack(spacing: 8) {
-                color
-                    .frame(width: 32, height: 32)
-                Text(title.uppercased())
-                    .font(.pMedium13)
-                    .foregroundColor(.textPrimary)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-
-            if isSelected {
-                Button(action: {
-                    isSelected.toggle()
-                }) {
+        Button {
+            isSelected.toggle()
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                VStack(spacing: 8) {
+                    color
+                        .frame(width: 32, height: 32)
+                    Text(title.uppercased())
+                        .font(.pMedium13)
+                        .foregroundColor(.textPrimary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                
+                if isSelected {
                     ZStack {
                         Rectangle()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.black)
-
                         Image(systemName: "checkmark")
                             .resizable()
                             .frame(width: 12, height: 12)
@@ -40,9 +39,10 @@ struct QuizColorItem: View {
                     }
                 }
             }
+            .padding(10)
+            .border(isSelected ? .textPrimary : .strokeSecondary)
         }
-        .padding(10)
-        .border(isSelected ? .textPrimary : .strokeSecondary)
+        .buttonStyle(.plain)
     }
 }
 

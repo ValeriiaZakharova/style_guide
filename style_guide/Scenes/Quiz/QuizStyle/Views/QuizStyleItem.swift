@@ -14,23 +14,23 @@ struct QuizStyleItem: View {
     @Binding var isSelected: Bool
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            HStack {
-                VStack(alignment: .center, spacing: 4) {
-                    image
-                        .resizable()
-                        .scaledToFit()
-
-                    Text(title.uppercased())
-                        .font(isSelected ? .pMedium13 : .pLight13)
-                        .foregroundColor(.textPrimary)
+        Button {
+            isSelected.toggle()
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                HStack {
+                    VStack(alignment: .center, spacing: 4) {
+                        image
+                            .resizable()
+                            .scaledToFit()
+                        
+                        Text(title.uppercased())
+                            .font(isSelected ? .pMedium13 : .pLight13)
+                            .foregroundColor(.textPrimary)
+                    }
+                    Spacer()
                 }
-                Spacer()
-            }
-            .padding(8)
-            Button(action: {
-                isSelected.toggle()
-            }) {
+                .padding(8)
                 ZStack {
                     Rectangle()
                         .stroke(isSelected ? .textPrimary : .strokeSecondary, lineWidth: 1)
@@ -43,10 +43,11 @@ struct QuizStyleItem: View {
                             .foregroundColor(.white)
                     }
                 }
+                .padding(10)
             }
-            .padding(10)
+            .border(isSelected ? .textPrimary : .strokeSecondary)
         }
-        .border(isSelected ? .textPrimary : .strokeSecondary)
+        .buttonStyle(.plain)
     }
 }
 

@@ -14,19 +14,19 @@ struct QuizFocusItem: View {
     @Binding var isSelected: Bool
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title.uppercased())
-                    .font(.pMedium13)
-                    .foregroundColor(.textPrimary)
-                Text(subtitle)
-                    .font(.pLight14)
-                    .foregroundColor(.textPrimary)
-            }
-            Spacer()
-            Button(action: {
-                isSelected.toggle()
-            }) {
+        Button {
+            isSelected.toggle()
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title.uppercased())
+                        .font(.pMedium13)
+                        .foregroundColor(.textPrimary)
+                    Text(subtitle)
+                        .font(.pLight14)
+                        .foregroundColor(.textPrimary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 ZStack {
                     Rectangle()
                         .stroke(isSelected ? .textPrimary : .strokeSecondary, lineWidth: 1)
@@ -40,9 +40,11 @@ struct QuizFocusItem: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
+            .padding(20)
+            .border(isSelected ? .textPrimary : .strokeSecondary)
         }
-        .padding(20)
-        .border(isSelected ? .textPrimary : .strokeSecondary)
+        .buttonStyle(.plain)
     }
 }
 

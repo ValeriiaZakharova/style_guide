@@ -28,9 +28,6 @@ struct QuizFocusView: View {
                                 }
                             )
                         )
-                        .onTapGesture {
-                            viewStore.send(.toggleSelection(id: model.id))
-                        }
                     }
                 }
                 .safeAreaInset(edge: .bottom) {
