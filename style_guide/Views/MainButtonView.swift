@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainButtonView: View {
     let title: String
-    let color: Color
+    var color: Color = .textPrimary
     let action: () -> Void
 
     var body: some View {
@@ -25,5 +25,7 @@ struct MainButtonView: View {
 }
 
 #Preview {
-    MainButtonView(title: "Get started", color: .blue) { }
+    MainButtonView(title: "Get started", action: {
+        
+    })
 }

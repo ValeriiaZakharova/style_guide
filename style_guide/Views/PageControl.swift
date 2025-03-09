@@ -12,6 +12,7 @@ struct PageControl: View {
     @Binding var currentPage: Int
     var numberOfPages: Int
 
+
     var body: some View {
         HStack(spacing: 8) {
             ForEach(0..<numberOfPages, id: \.self) { index in
@@ -29,6 +30,9 @@ struct PageControl: View {
                             .fill(.inActive)
                             .frame(width: 8, height: 8)
                     }
+                }
+                .onTapGesture {
+                    currentPage = index
                 }
             }
         }

@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct AttributedTextView: UIViewRepresentable {
+    private enum Constants {
+        static let terms = ""
+        static let privacy = ""
+    }
+
     var fullText: String
     var firstPart: String
     var secondPart: String
@@ -20,7 +25,7 @@ struct AttributedTextView: UIViewRepresentable {
         textView.isSelectable = true
         textView.textAlignment = .center
         textView.backgroundColor = .clear
-        
+
         textView.linkTextAttributes = [
             .foregroundColor: UIColor.textPrimary,
             .font: UIFont.pRegular13,
@@ -32,12 +37,12 @@ struct AttributedTextView: UIViewRepresentable {
 
         if let range = fullText.range(of: firstPart) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.link, value: "terms", range: nsRange)
+            attributedString.addAttribute(.link, value: Constants.terms, range: nsRange)
         }
 
         if let range = fullText.range(of: secondPart) {
             let nsRange = NSRange(range, in: fullText)
-            attributedString.addAttribute(.link, value: "privacy", range: nsRange)
+            attributedString.addAttribute(.link, value: Constants.privacy, range: nsRange)
         }
 
         let nsRange = NSRange(location: .zero, length: fullText.count)
@@ -50,7 +55,7 @@ struct AttributedTextView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) { }
-    
+
     // Link taps
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: AttributedTextView
@@ -60,9 +65,9 @@ struct AttributedTextView: UIViewRepresentable {
         }
 
         func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange) -> Bool {
-            if url.absoluteString == "terms" {
+            if url.absoluteString == Constants.terms {
                 parent.firstAction()
-            } else if url.absoluteString == "privacy" {
+            } else if url.absoluteString == Constants.privacy {
                 parent.secondAction()
             }
             return false
