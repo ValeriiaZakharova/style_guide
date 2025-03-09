@@ -14,7 +14,7 @@ struct QuizColorReducer {
     struct State: Equatable {
         var quizColorData: [QuizColorItemModel] = QuizColorItemModel.model
         let title = "Choose favourite colors"
-//        @PresentationState var paywall: PaywallReducer.State?
+        @PresentationState var paywall: PaywallReducer.State?
     }
 
     enum Action: BindableAction {
@@ -22,7 +22,7 @@ struct QuizColorReducer {
         case dismiss
         case binding(BindingAction<State>)
         case toggleSelection(id: UUID)
-//        case paywall(PresentationAction<PaywallReducer.Action>)
+        case paywall(PresentationAction<PaywallReducer.Action>)
     }
 
     @Dependency(\.dismiss)
@@ -37,7 +37,7 @@ struct QuizColorReducer {
                     await dismiss()
                 }
             case .redirect:
-
+                state.paywall = PaywallReducer.State()
                 return .none
             case .toggleSelection(let id):
                 if let index = state.quizColorData.firstIndex(where: { $0.id == id }) {
@@ -46,11 +46,13 @@ struct QuizColorReducer {
                 return .none
             case .binding:
                 return .none
+            case .paywall:
+                return .none
             }
         }
-//        .ifLet(\.$paywall, action: \.paywall) {
-//            PaywallReducer()
-//        }._printChanges()
+        .ifLet(\.$paywall, action: \.paywall) {
+            PaywallReducer()
+        }._printChanges()
     }
 }
 

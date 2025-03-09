@@ -53,6 +53,9 @@ struct QuizColorView: View {
                 viewStore.send(.dismiss)
             }
         }
+        .fullScreenCover(store: store.scope(state: \.$paywall, action: \.paywall)) { store in
+            PaywallView(store: store)
+        }
         .padding(.horizontal, 20)
         .navigationBarBackButtonHidden(true)
     }
