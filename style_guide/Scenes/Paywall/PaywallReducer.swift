@@ -19,8 +19,7 @@ struct PaywallReducer {
         case fetchProducts
         case productsResponse(TaskResult<[Product]>)
         case toggleSelection(id: String)
-        case makePurchase(PaywallProductModel)
-        // TODO: Add purchase actions
+        case makePurchase
         case binding(BindingAction<State>)
     }
 
@@ -40,7 +39,7 @@ struct PaywallReducer {
                 }
             case .productsResponse(.success(let products)):
                 state.products = products.map {
-                    PaywallProductModel(id: $0.id, title: $0.displayName, price: $0.displayPrice, description: $0.description, isTrial: $0.id == Constants.trialId)
+                    PaywallProductModel(id: $0.id, title: $0.displayName, price: $0.displayPrice, description: $0.description, isTrial: $0.id == Constants.trialId, isSelected: $0.id == Constants.trialId)
                 }
                 .sorted(by: { first, second in
                     let firstIndex = Constants.identifiers.firstIndex(of: first.id) ?? Constants.identifiers.count
@@ -55,13 +54,13 @@ struct PaywallReducer {
                     return updatedProduct
                 }
                 return .none
-            case .makePurchase(let product):
-                
+            case .makePurchase:
+                // TODO: Implement purchase logic, out of the scope
                 return .none
             case .binding:
                 return .none
             case .productsResponse(.failure(let error)):
-                // TODO: Handle error
+                // TODO: Handle error, out of the scope
                 return .none
             }
         }
