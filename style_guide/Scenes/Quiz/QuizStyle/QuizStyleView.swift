@@ -50,6 +50,8 @@ struct QuizStyleView: View {
             }
             .customToolbar(title: "Style preferences".uppercased()) {
                 viewStore.send(.dismiss)
+            }.onAppear {
+                store.send(.getData)
             }
         }
         .navigationDestination(store: store.scope(state: \.$quizColor, action: \.quizColor)) { store in

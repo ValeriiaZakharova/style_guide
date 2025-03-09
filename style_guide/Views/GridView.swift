@@ -24,10 +24,10 @@ struct GridView<Item: Identifiable, Content: View>: View {
 #Preview {
     GridView(
         items: [
-            QuizStyleItemModel(title: "Sporty", image: Image("sporty"), isSelected: false),
-            QuizStyleItemModel(title: "Casual", image: Image("casual"), isSelected: true),
-            QuizStyleItemModel(title: "Formal", image: Image("urban"), isSelected: false),
-            QuizStyleItemModel(title: "BOHO", image: Image("boho"), isSelected: true)
+            QuizStyleViewModel(title: "Sporty", image: Image("sporty"), isSelected: false),
+            QuizStyleViewModel(title: "Casual", image: Image("casual"), isSelected: true),
+            QuizStyleViewModel(title: "Formal", image: Image("urban"), isSelected: false),
+            QuizStyleViewModel(title: "BOHO", image: Image("boho"), isSelected: true)
         ],
         columns: [
             GridItem(.flexible(), spacing: 12),
@@ -43,13 +43,13 @@ struct GridView<Item: Identifiable, Content: View>: View {
 
     GridView(
         items: [
-            QuizColorItemModel(title: "Light blue", color: .lightBlue),
-            QuizColorItemModel(title: "Blue", color: .blue, isSelected: true),
-            QuizColorItemModel(title: "Indigo", color: .indigo, isSelected: true),
-            QuizColorItemModel(title: "Turquoise", color: .turquoise),
-            QuizColorItemModel(title: "Mint", color: .mint),
-            QuizColorItemModel(title: "Olive", color: .olive),
-            QuizColorItemModel(title: "Green", color: .green)
+            QuizColorViewModel(title: "Light blue", color: .lightBlue),
+            QuizColorViewModel(title: "Blue", color: .blue, isSelected: true),
+            QuizColorViewModel(title: "Indigo", color: .indigo, isSelected: true),
+            QuizColorViewModel(title: "Turquoise", color: .turquoise),
+            QuizColorViewModel(title: "Mint", color: .mint),
+            QuizColorViewModel(title: "Olive", color: .olive),
+            QuizColorViewModel(title: "Green", color: .green)
         ],
         columns: [
             GridItem(.flexible(), spacing: 12),
