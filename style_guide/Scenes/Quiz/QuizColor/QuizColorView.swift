@@ -1,16 +1,16 @@
 //
-//  QuizStyleView.swift
+//  QuizColorView.swift
 //  style_guide
 //
-//  Created by Valeriia Zakharova on 08.03.2025.
+//  Created by Valeriia Zakharova on 09.03.2025.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
-struct QuizStyleView: View {
+struct QuizColorView: View {
 
-    let store: StoreOf<QuizStyleReducer>
+    let store: StoreOf<QuizColorReducer>
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -21,14 +21,15 @@ struct QuizStyleView: View {
                     .font(.kBolt26)
                     .foregroundStyle(.textPrimary)
                     .padding(.bottom, 24)
-                GridView(items: viewStore.quizStyleData,
+                GridView(items: viewStore.quizColorData,
                          columns: [
+                            GridItem(.flexible(), spacing: 12),
                             GridItem(.flexible(), spacing: 12),
                             GridItem(.flexible(), spacing: 12)
                          ]) { item in
-                             QuizStyleItem(
+                             QuizColorItem(
                                 title: item.title,
-                                image: item.image,
+                                color: item.color,
                                 isSelected: Binding(
                                     get: { item.isSelected },
                                     set: { _ in
@@ -52,16 +53,13 @@ struct QuizStyleView: View {
                 viewStore.send(.dismiss)
             }
         }
-        .navigationDestination(store: store.scope(state: \.$quizColor, action: \.quizColor)) { store in
-            QuizColorView(store: store)
-        }
         .padding(.horizontal, 20)
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    QuizStyleView(store: Store(initialState: QuizStyleReducer.State(), reducer: {
-        QuizStyleReducer()
+    QuizColorView(store: Store(initialState: QuizColorReducer.State(), reducer: {
+        QuizColorReducer()
     }))
 }

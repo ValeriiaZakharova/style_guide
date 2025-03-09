@@ -1,20 +1,20 @@
 //
-//  QuizStyleReduser.swift
+//  QuizColorReducer.swift
 //  style_guide
 //
-//  Created by Valeriia Zakharova on 08.03.2025.
+//  Created by Valeriia Zakharova on 09.03.2025.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
 @Reducer
-struct QuizStyleReducer {
+struct QuizColorReducer {
 
     struct State: Equatable {
-        var quizStyleData: [QuizStyleItemModel] = QuizStyleItemModel.model
+        var quizColorData: [QuizColorItemModel] = QuizColorItemModel.model
         let title = "Which style best represents you?"
-        @PresentationState var quizColor: QuizColorReducer.State?
+//        @PresentationState var paywall: PaywallReducer.State?
     }
 
     enum Action: BindableAction {
@@ -22,7 +22,7 @@ struct QuizStyleReducer {
         case dismiss
         case binding(BindingAction<State>)
         case toggleSelection(id: UUID)
-        case quizColor(PresentationAction<QuizColorReducer.Action>)
+//        case paywall(PresentationAction<PaywallReducer.Action>)
     }
 
     @Dependency(\.dismiss)
@@ -37,21 +37,20 @@ struct QuizStyleReducer {
                     await dismiss()
                 }
             case .redirect:
-                state.quizColor = QuizColorReducer.State()
+
                 return .none
             case .toggleSelection(let id):
-                if let index = state.quizStyleData.firstIndex(where: { $0.id == id }) {
-                    state.quizStyleData[index].isSelected.toggle()
+                if let index = state.quizColorData.firstIndex(where: { $0.id == id }) {
+                    state.quizColorData[index].isSelected.toggle()
                 }
                 return .none
             case .binding:
                 return .none
-            case .quizColor:
-                return .none
             }
         }
-        .ifLet(\.$quizColor, action: \.quizColor) {
-            QuizColorReducer()
-        }._printChanges()
+//        .ifLet(\.$quizColor, action: \.quizColor) {
+//            QuizColorReducer()
+//        }._printChanges()
     }
 }
+
