@@ -33,7 +33,7 @@ struct PurchaseButton: View {
                         Text(title)
                             .font(.pMedium16)
                             .foregroundColor(.textPrimary)
-                            .lineLimit(2)
+                            .lineLimit(3)
                         if !isTrial {
                             Text(price)
                                 .font(.pRegular16)
