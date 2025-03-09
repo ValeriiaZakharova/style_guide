@@ -11,4 +11,7 @@ struct PaywallProductModel: Equatable, Identifiable {
     let id: String
     let title: String
     let price: String
+    let description: String
+    let isTrial: Bool
+    var isSelected: Bool = false
 }

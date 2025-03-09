@@ -38,8 +38,13 @@ struct PaywallReducer {
                 }
             case .productsResponse(.success(let products)):
                 state.products = products.map {
-                    PaywallProductModel(id: $0.id, title: $0.displayName, price: $0.displayPrice)
+                    PaywallProductModel(id: $0.id, title: $0.displayName, price: $0.displayPrice, description: $0.description, isTrial: $0.id == Constants.trialId)
                 }
+                .sorted(by: { first, second in
+                    let firstIndex = Constants.identifiers.firstIndex(of: first.id) ?? Constants.identifiers.count
+                    let secondIndex = Constants.identifiers.firstIndex(of: second.id) ?? Constants.identifiers.count
+                    return firstIndex < secondIndex
+                })
                 return .none
             case .binding:
                 return .none

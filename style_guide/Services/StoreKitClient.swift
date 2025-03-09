@@ -8,16 +8,21 @@
 import StoreKit
 import Dependencies
 
-struct StoreKitClient {
-
-    private let identifiers = [
-        "com.style_guide.trial",
-        "com.style_guide.quarterly",
-        "com.style_guide.lifetime"
+struct Constants {
+    static let trialId = "com.style_guide.trial"
+    static let quarterlyId = "com.style_guide.quarterly"
+    static let lifetimeId = "com.style_guide.lifetime"
+    
+    static let identifiers = [
+        Constants.trialId,
+        Constants.quarterlyId,
+        Constants.lifetimeId
     ]
+}
 
+struct StoreKitClient {
     func fetchProducts() async throws -> [Product] {
-        try await Product.products(for: identifiers)
+        try await Product.products(for: Constants.identifiers)
     }
 }
 
